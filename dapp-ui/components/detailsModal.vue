@@ -29,7 +29,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 
-import { bookProperty } from "~/plugins/metamask";
+import { bookProperty, web3 } from "~/plugins/metamask";
 
 export default {
   components: {
@@ -56,7 +56,8 @@ export default {
     book() {
       const startDay = this.getDayOfYear(this.startDate)
       const endDay = this.getDayOfYear(this.endDate)
-      bookProperty(this.propData.id, startDay, endDay)
+      const totalPrice = web3().utils.toWei(this.propData.price, 'ether') * (endDay-startDay)
+      bookProperty(this.propData.id, startDay, endDay, totalPrice)
     }
   }
 };

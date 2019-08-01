@@ -36,7 +36,7 @@
                     placeholder="Price"
                   />
                 </div>
-                <button v-on:click="postAdd" class="btn btn-primary float-right">Submit</button>
+                <button v-on:click="postAd" class="btn btn-primary float-right">Submit</button>
                 <!-- <button class="btn btn-outline-secondary float-right mr-3" v-on:click="close">Cancel</button> -->
             </slot>
           </div>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { postProperty } from "~/plugins/metamask";
+import { postProperty, web3 } from "~/plugins/metamask";
 
 export default {
   components: {},
@@ -60,7 +60,8 @@ export default {
   },
   methods: {
     postAd() {
-      postProperty(this.title, this.description, this.price)
+      const weiValue = web3().utils.toWei(this.price, 'ether');
+      postProperty(this.title, this.description, weiValue)
     }
   }
 };

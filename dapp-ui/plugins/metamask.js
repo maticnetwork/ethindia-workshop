@@ -1,8 +1,10 @@
+import AirbnbABI from './airbnbABI'
 const Web3 = require('web3')
-let metamaskWeb3 = new Web3('http://localhost:8545');
+
+let metamaskWeb3 = new Web3('http://localhost:8545')
 let account = null
 let airbnbContract
-let airbnbContractAddress = '0x9aeFcc2dCf2BC653eE18e569D19013A9EcE3558F'
+let airbnbContractAddress = '0x4d0Df282067D3611c6B82388e87C57689c5B541F'
 
 export function web3() {
   return metamaskWeb3
@@ -26,209 +28,33 @@ export async function setProvider() {
     metamaskWeb3 = new Web3(web3.currentProvider);
   }
   account = await metamaskWeb3.eth.getAccounts()
-  console.log('ac', account)
 }
 
 export async function postProperty(name, description, price) {
   // TODO: call Airbnb.rentOutSpace
+  const prop = await getAirbnbContract().methods.rentOutproperty(name, description, price).send({
+    from: account[0]
+  })
+  alert('Property Posted Successfully')
 }
 
-export async function bookProperty(spaceId, checkInDate, checkOutDate) {
+export async function bookProperty(spaceId, checkInDate, checkOutDate, totalPrice) {
   // TODO: call Airbnb.rentSpace
+  const prop = await getAirbnbContract().methods.rentProperty(spaceId, checkInDate, checkOutDate).send({
+    from: account[0],
+    value: totalPrice,
+  })
+  alert('Property Booked Successfully')
 }
 
-const abi = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "bookingId",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "bookings",
-    "outputs": [
-      {
-        "name": "propertyId",
-        "type": "uint256"
-      },
-      {
-        "name": "checkInDate",
-        "type": "uint256"
-      },
-      {
-        "name": "checkoutDate",
-        "type": "uint256"
-      },
-      {
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "propertyId",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "properties",
-    "outputs": [
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "name": "isActive",
-        "type": "bool"
-      },
-      {
-        "name": "price",
-        "type": "uint256"
-      },
-      {
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "propertyId",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewProperty",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "propertyId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "bookingId",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewBooking",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "rentOutproperty",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_propertyId",
-        "type": "uint256"
-      },
-      {
-        "name": "checkInDate",
-        "type": "uint256"
-      },
-      {
-        "name": "checkoutDate",
-        "type": "uint256"
-      }
-    ],
-    "name": "rentProperty",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_propertyId",
-        "type": "uint256"
-      }
-    ],
-    "name": "markPropertyAsInactive",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
-
-function getContract() {
-  airbnbContract = airbnbContract || new metamaskWeb3.eth.Contract(abi, airbnbContractAddress)
+function getAirbnbContract() {
+  airbnbContract = airbnbContract || new metamaskWeb3.eth.Contract(AirbnbABI.abi, airbnbContractAddress)
   return airbnbContract
 }
 
 export async function fetchAllProperties() {
-  const propertyId = await getContract().methods.propertyId().call()
-  // console.log(propertyId)
+  const propertyId = await getAirbnbContract().methods.propertyId().call()
+
   const properties = []
   for (let i = 0; i < propertyId; i++) {
     const p = await airbnbContract.methods.properties(i).call()
@@ -238,7 +64,7 @@ export async function fetchAllProperties() {
       description: p.description,
       price: metamaskWeb3.utils.fromWei(p.price)
     })
-    // console.log(properties)
+
   }
   return properties
 }

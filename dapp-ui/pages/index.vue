@@ -14,28 +14,19 @@
 
 <script>
 import card from "~/components/card.vue";
-
+import { fetchAllProperties, setProvider } from "~/plugins/metamask"
 export default {
   components: {
     card
   },
+  async mounted() {
+    await setProvider()
+    const test = await fetchAllProperties()
+    this.posts = test
+  },
   data() {
     return {
       posts: [
-        {
-          id: "1",
-          name: "XYZ",
-          description:
-            "Some quick example text to build on the card title and make up the bulk of the card's content.",
-          price: "2 ETH"
-        },
-        {
-          id: "1",
-          name: "XYZ",
-          description:
-            "Some quick example text to build on the card title and make up the bulk of the card's content.",
-          price: "2 ETH"
-        },
       ]
     };
   }
