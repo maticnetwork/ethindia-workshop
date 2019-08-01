@@ -11,13 +11,13 @@
               <h3>Title: {{propData.name}}</h3>
               <h3>Price: {{propData.price}}</h3>
               <p>Description: {{propData.description}}</p>
-            </slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              <button class="modal-default-button" @click="$emit('close')">
-                Cancel
-              </button>
+              <div class="row ml-4 p-2">
+                <datepicker :value="startDate" v-model="startDate"></datepicker>
+                <datepicker v-model="endDate"></datepicker>
+              </div>
+              <b-button v-on:click="book" class="mr-5 mt-3">
+                <span>Book Now</span>
+              </b-button>
             </slot>
           </div>
         </div>
@@ -27,14 +27,35 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+
 export default {
-  components: {},
+  components: {
+    Datepicker
+  },
   props: ["propData"],
   data() {
     return {
-      showModal: false
-    }
+      showModal: false,
+      startDate: new Date(),
+      flag: true,
+      endDate: new Date(),
+    };
   },
+  methods: {
+    getDayOfYear(date) {
+      var now = new Date(date);
+      var start = new Date(now.getFullYear(), 0, 0);
+      var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+      var oneDay = 1000 * 60 * 60 * 24;
+      var day = Math.floor(diff / oneDay);
+      return day
+    },
+    book() {
+      const startDay = this.getDayOfYear(this.startDate)
+      const endDay = this.getDayOfYear(this.endDate)
+    }
+  }
 };
 </script>
 
