@@ -1,9 +1,11 @@
 <template>
   <div class="container m-5">
     <div>
-      <!-- <h1 class="title">ETHIndia Workshop</h1> -->
+      <h1 class="title">ETHIndia Workshop</h1>
       <div class="row">
-        <div class="col-sm"><card :propObject="test"/></div>
+        <div class="m-3" v-for="post in posts">
+          <card :propObject="post" key="post.id" />
+        </div>
       </div>
     </div>
   </div>
@@ -18,12 +20,23 @@ export default {
   },
   data() {
     return {
-      test: {
-        name: 'XYZ',
-        description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-        price: '2 ETH',
-      }
-    }
+      posts: [
+        {
+          id: "1",
+          name: "XYZ",
+          description:
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+          price: "2 ETH"
+        },
+        {
+          id: "1",
+          name: "XYZ",
+          description:
+            "Some quick example text to build on the card title and make up the bulk of the card's content.",
+          price: "2 ETH"
+        },
+      ]
+    };
   }
 };
 </script>
