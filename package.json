@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:ethereum": "ganache-cli -m 'layer post chase message demise fresh resource beyond bulb rose garden kite'",
+    "compile": "truffle compile",
+    "test": "truffle test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "truffle": "^5.0.29"
+  },
+  "dependencies": {
+    "ganache-cli": "^6.5.1"
+  }
 }
