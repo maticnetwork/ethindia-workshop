@@ -7,7 +7,7 @@
             <span>Rent Your Property</span>
           </b-button>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <b-button v-on:click="metamask" class="mr-5 mt-3">
             <span>Metamask</span>
           </b-button>
@@ -16,7 +16,7 @@
           <b-button v-on:click="walletConnect" class="mr-5 mt-3">
             <span>WalletConnect</span>
           </b-button>
-        </li>
+        </li> -->
       </ul>
     </nav>
   
