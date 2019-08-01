@@ -19,7 +19,7 @@
         </li>
       </ul>
     </nav>
-
+  
     <property-form v-if="showModal">
       <h3 slot="header">Rent Your Property</h3>
     </property-form>
@@ -28,12 +28,13 @@
 
 <script>
 import PropertyForm from "~/components/propertyForm.vue";
-import { setProvider, web3 } from "~/plugins/metamask";
+import { accountAddress, setProvider, web3 } from "~/plugins/metamask";
 
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      address: null,
     }
   },
   components: {
@@ -44,7 +45,9 @@ export default {
       this.showModal = !this.showModal
     },
     async metamask() {
-      setProvider()
+      await setProvider()
+      const accAddress = await accountAddress()
+      this.address = accAddress[0]
     },
     walletConnect() {
       // TODO: connect to walletconnect

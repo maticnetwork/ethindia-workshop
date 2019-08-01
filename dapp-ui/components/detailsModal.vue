@@ -29,6 +29,8 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 
+import { bookProperty } from "~/plugins/metamask";
+
 export default {
   components: {
     Datepicker
@@ -54,6 +56,7 @@ export default {
     book() {
       const startDay = this.getDayOfYear(this.startDate)
       const endDay = this.getDayOfYear(this.endDate)
+      bookProperty(this.propData.id, startDay, endDay)
     }
   }
 };

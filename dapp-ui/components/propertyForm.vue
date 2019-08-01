@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { web3 } from "~/plugins/metamask";
+import { postProperty } from "~/plugins/metamask";
 
 export default {
   components: {},
@@ -59,11 +59,8 @@ export default {
     }
   },
   methods: {
-    postAdd() {
-      console.log('title', this.title)
-      console.log('description', this.description)
-      console.log('price', this.price)
-      console.log('web3', web3())
+    postAd() {
+      postProperty(this.title, this.description, this.price)
     }
   }
 };

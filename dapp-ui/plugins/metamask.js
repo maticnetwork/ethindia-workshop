@@ -1,10 +1,14 @@
 import Web3 from 'web3'
 
 let metamaskWeb3 = null
-
+let account = null
 
 export function web3() {
   return metamaskWeb3
+}
+
+export const accountAddress = () => {
+  return account
 }
 
 export async function setProvider() {
@@ -20,4 +24,14 @@ export async function setProvider() {
   else if (window.web3) {
     metamaskWeb3 = new Web3(web3.currentProvider);
   }
+  account = await metamaskWeb3.eth.getAccounts()
+  console.log('ac', account)
+}
+
+export async function postProperty(name, description, price) {
+  // TODO: call Airbnb.rentOutSpace
+}
+
+export async function bookProperty(spaceId, checkInDate, checkOutDate) {
+  // TODO: call Airbnb.rentSpace
 }
