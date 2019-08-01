@@ -1,7 +1,8 @@
 <template>
   <div class="container m-5">
     <div>
-      <h1 class="title">ETHIndia Workshop</h1>
+      <!-- <h1 class="title">ETHIndia Workshop</h1> -->
+      <h6 class="title">Places to stay around the world</h6>
       <div class="row">
         <div class="m-3" v-for="post in posts">
           <card :propObject="post" key="post.id" />
@@ -57,6 +58,15 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+.title {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: block;
+  font-weight: 150;
+  font-size: 40px;
   color: #35495e;
   letter-spacing: 1px;
 }

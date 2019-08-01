@@ -29,6 +29,8 @@
 <script>
 import PropertyForm from "~/components/propertyForm.vue";
 import { accountAddress, setProvider, web3 } from "~/plugins/metamask";
+import { initWalletConnect } from "~/plugins/walletConnect";
+
 
 export default {
   data() {
@@ -51,6 +53,7 @@ export default {
     },
     walletConnect() {
       // TODO: connect to walletconnect
+      initWalletConnect()
     }
   }
 }
