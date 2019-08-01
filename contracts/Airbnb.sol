@@ -15,7 +15,7 @@ contract Airbnb {
     bool[] isBooked;
   }
 
-  uint256 propertyId;
+  uint256 public propertyId;
 
   // mapping of propertyId to Property object
   mapping(uint256 => Property) public properties;
@@ -28,7 +28,7 @@ contract Airbnb {
     address user;
   }
 
-  uint256 bookingId;
+  uint256 public bookingId;
 
   // mapping of bookingId to Booking object
   mapping(uint256 => Booking) public bookings;
