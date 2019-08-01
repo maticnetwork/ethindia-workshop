@@ -100,3 +100,4 @@ function _createBooking(uint256 _propertyId, uint256 checkInDate, uint256 checko
   emit NewBooking(_propertyId, bookingId++);
 }
 ```
+
