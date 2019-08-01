@@ -14,7 +14,6 @@
     "truffle": "^5.0.29"
   },
   "dependencies": {
-    "ganache-cli": "^6.5.1",
-    "web3": "^1.2.0"
+    "ganache-cli": "^6.5.1"
   }
 }

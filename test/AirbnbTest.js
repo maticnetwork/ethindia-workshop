@@ -6,7 +6,6 @@ contract("Airbnb", async function(accounts) {
 
   beforeEach(async function() {
     airbnb = await Airbnb.new()
-    console.log(airbnb.address)
   })
 
   it("rentOutSpace", async function() {
@@ -47,11 +46,5 @@ contract("Airbnb", async function(accounts) {
     )
     assert.ok(rentProperty.receipt.logs[0].args.propertyId.eq(propertyId))
     assert.ok(rentProperty.receipt.logs[0].args.bookingId.eq(web3.utils.toBN(1)))
-
-    await airbnb.rentOutproperty(
-      "Casa Koko Luxury",
-      "Contemporary craft architecture on the Miami beach",
-      web3.utils.toBN('1503').mul(SCALING_FACTOR).div(web3.utils.toBN(1000)) // 1.503 ether
-    )
   })
 })
