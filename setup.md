@@ -41,12 +41,8 @@ We will use existing solidity contracts developed in previous session, and then 
 Clone the template into your folder:
 ```
 git clone https://github.com/maticnetwork/ethindia-workshop.git
-cd ethindia-workshop
-```
 
-Here we are going to use `dapp-solution` branch
-```
-git checkout dapp-solution
+cd ethindia-workshop
 
 cd dapp-ui
 
