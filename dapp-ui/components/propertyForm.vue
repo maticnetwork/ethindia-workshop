@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { postProperty, web3 } from "~/plugins/metamask";
+import { postProperty, web3 } from "~/plugins/utils";
 
 export default {
   components: {},

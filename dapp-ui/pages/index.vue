@@ -15,7 +15,7 @@
 
 <script>
 import card from "~/components/card.vue";
-import { fetchAllProperties, setProvider } from "~/plugins/metamask"
+import { fetchAllProperties, setProvider } from "~/plugins/utils"
 import { sampleTx } from "~/plugins/walletConnect"
 
 export default {

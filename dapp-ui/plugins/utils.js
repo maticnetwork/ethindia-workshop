@@ -15,7 +15,7 @@ export const accountAddress = () => {
 }
 
 export async function setProvider() {
-  
+  // TODO: get injected Metamask Object and create Web3 instance
 }
 
 

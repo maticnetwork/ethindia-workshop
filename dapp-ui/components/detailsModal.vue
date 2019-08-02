@@ -29,7 +29,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 
-import { bookProperty, web3 } from "~/plugins/metamask";
+import { bookProperty, web3 } from "~/plugins/utils";
 
 export default {
   components: {
