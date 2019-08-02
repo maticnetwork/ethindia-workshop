@@ -6,7 +6,7 @@ Setup
 npm install
 ```
 
-2. Follow [instructions](./Instructions.md) to complete the smart contract code.
+2. Follow [instructions](./instructions.md) to complete the smart contract code.
 
 3. Run ethereum blockchain locally
 ```
