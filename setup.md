@@ -69,4 +69,4 @@ Go to DEPLOY & RUN TRANSACTIONS and click deploy.
 
 on sucessfull deploy copy `contract address`
 
-
+[NEXT - Complete DApps UI ](./dapps.md)
