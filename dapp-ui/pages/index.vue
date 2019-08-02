@@ -1,8 +1,8 @@
 <template>
   <div class="container m-5">
     <div>
-      <!-- <h1 class="title">ETHIndia Workshop</h1> -->
-      <h6 class="title">Places to stay around the world</h6>
+      <h1 class="title">ETHIndia Workshop</h1>
+      <!-- <h6 class="subtitle">Places to stay around the world</h6> -->
       
       <div class="row">
         <div class="m-3" v-for="post in posts">
@@ -24,6 +24,7 @@ export default {
   },
   async mounted() {
     // init Metamask
+
     // fetch all properties
   },
   data() {
@@ -59,7 +60,7 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-.title {
+.subtitle {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;

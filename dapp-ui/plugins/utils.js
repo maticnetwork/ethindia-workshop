@@ -4,7 +4,7 @@ const Web3 = require('web3')
 let metamaskWeb3 = new Web3('http://localhost:8545')
 let account = null
 let airbnbContract
-let airbnbContractAddress = '0x4d0Df282067D3611c6B82388e87C57689c5B541F'
+let airbnbContractAddress = '' // Paste Contract address here
 
 export function web3() {
   return metamaskWeb3
@@ -16,11 +16,13 @@ export const accountAddress = () => {
 
 export async function setProvider() {
   // TODO: get injected Metamask Object and create Web3 instance
+
 }
 
 
 function getAirbnbContract() {
   // TODO: create and return contract Object
+
 }
 
 

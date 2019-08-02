@@ -7,11 +7,6 @@
             <span>Rent Your Property</span>
           </b-button>
         </li>
-        <li class="nav-item">
-          <b-button v-on:click="walletConnect" class="mr-5 mt-3">
-            <span>WalletConnect</span>
-          </b-button>
-        </li>
       </ul>
     </nav>
 
