@@ -3,6 +3,7 @@
     <div>
       <!-- <h1 class="title">ETHIndia Workshop</h1> -->
       <h6 class="title">Places to stay around the world</h6>
+      
       <div class="row">
         <div class="m-3" v-for="post in posts">
           <card :propObject="post" key="post.id" />
@@ -15,6 +16,8 @@
 <script>
 import card from "~/components/card.vue";
 import { fetchAllProperties, setProvider } from "~/plugins/metamask"
+import { sampleTx } from "~/plugins/walletConnect"
+
 export default {
   components: {
     card
@@ -28,6 +31,11 @@ export default {
       posts: [
       ]
     };
+  },
+  methods: {
+    async sendTx() {
+      await sampleTx()
+    }
   }
 };
 </script>
