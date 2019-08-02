@@ -25,12 +25,14 @@ function getAirbnbContract() {
 
 
 export async function postProperty(name, description, price) {
-  // TODO: call Airbnb.rentOutSpace
+  // TODO: call Airbnb.rentOutproperty
+
   alert('Property Posted Successfully')
 }
 
 export async function bookProperty(spaceId, checkInDate, checkOutDate, totalPrice) {
   // TODO: call Airbnb.rentSpace
+  
   alert('Property Booked Successfully')
 }
 

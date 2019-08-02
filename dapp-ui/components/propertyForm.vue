@@ -9,13 +9,12 @@
 
           <div class="modal-body">
             <slot name="body">
-              <form>
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="title"
+                    v-model="title"
                     placeholder="Enter Title"
                   />
                 </div>
@@ -24,7 +23,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="description"
+                    v-model="description"
                     placeholder="Description"
                   />
                 </div>
@@ -33,13 +32,12 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="price"
+                    v-model="price"
                     placeholder="Price"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary float-right">Submit</button>
-                <button class="btn btn-outline-secondary float-right mr-3" v-on:click="close">Cancel</button>
-              </form>
+                <button v-on:click="postAd" class="btn btn-primary float-right">Submit</button>
+                <!-- <button class="btn btn-outline-secondary float-right mr-3" v-on:click="close">Cancel</button> -->
             </slot>
           </div>
         </div>
@@ -49,9 +47,24 @@
 </template>
 
 <script>
+import { postProperty, web3 } from "~/plugins/metamask";
+
 export default {
   components: {},
+  data() {
+    return {
+      title: '',
+      description: '',
+      price: '',
+    }
+  },
   methods: {
+    postAd() {
+      // convert price from ETH to Wei
+
+      // call metamask.postProperty
+      
+    }
   }
 };
 </script>

@@ -2,7 +2,15 @@
 ### setting up DApp
 1. paste your contract address to `airbnbContractAddress`
 
-1. Connect to MetaMask
+2. copy ABI
+
+3. Connect to MetaMask
+
+->
+```await setProvider()
+  const properties = await fetchAllProperties()
+  this.posts = properties
+```
 
 copy this to `setProvider` method in `metamask.js`
 ```
@@ -21,14 +29,25 @@ if (window.ethereum) {
   account = await metamaskWeb3.eth.getAccounts()
 ```
 
-3. create and return contract Object
+4. create and return contract Object
 
 ```
 airbnbContract = airbnbContract || new metamaskWeb3.eth.Contract(AirbnbABI.abi, airbnbContractAddress)
   return airbnbContract
 ```
 
-4. postProperty
+5. postProperty
+copy below code inside `postAd` in propertyForm.js 
+
+```
+// convert price from ETH to Wei
+const weiValue = web3().utils.toWei(this.price, 'ether');
+
+// call metamask.postProperty
+postProperty(this.title, this.description, weiValue)
+```
+
+copy below code inside `postProperty` in metamask.js 
 
 ```
 const prop = await getAirbnbContract().methods.rentOutproperty(name, description, price).send({
@@ -36,7 +55,18 @@ const prop = await getAirbnbContract().methods.rentOutproperty(name, description
   })
 ```
 
-5. bookProperty
+6. bookProperty
+copy below code inside `book` in detailsModal.js 
+
+```
+const startDay = this.getDayOfYear(this.startDate)
+const endDay = this.getDayOfYear(this.endDate)
+const totalPrice = web3().utils.toWei(this.propData.price, 'ether') * (endDay-startDay)
+bookProperty(this.propData.id, startDay, endDay, totalPrice)
+```
+
+copy below code inside `bookProperty` in metamask.js 
+
 ```
 const prop = await getAirbnbContract().methods.rentProperty(spaceId, checkInDate, checkOutDate).send({
     from: account[0],
@@ -44,7 +74,7 @@ const prop = await getAirbnbContract().methods.rentProperty(spaceId, checkInDate
   })
 ```
 
-6. fetch all properties
+7. fetch all properties
 ```
 const propertyId = await getAirbnbContract().methods.propertyId().call()
 

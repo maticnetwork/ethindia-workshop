@@ -29,6 +29,8 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 
+import { bookProperty, web3 } from "~/plugins/metamask";
+
 export default {
   components: {
     Datepicker
@@ -52,8 +54,13 @@ export default {
       return day
     },
     book() {
-      const startDay = this.getDayOfYear(this.startDate)
-      const endDay = this.getDayOfYear(this.endDate)
+      // get Start date
+
+      // get End date
+
+      // price calculation
+
+      // call metamask.bookProperty
     }
   }
 };
