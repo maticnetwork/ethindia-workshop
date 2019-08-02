@@ -50,7 +50,7 @@ git checkout dapp-solution
 
 Start Ganache at `Port 8545`
 ```
-ganache-cli -p 7545
+ganache-cli -p 8545
 ```
 
 ## deploy contract using remix
