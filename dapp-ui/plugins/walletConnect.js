@@ -21,7 +21,3 @@ export async function sampleTx() {
   // Send transaction
  
 }
-
-export async function bookProperty(spaceId, checkInDate, checkOutDate) {
-  // TODO: call Airbnb.rentSpace
-}
