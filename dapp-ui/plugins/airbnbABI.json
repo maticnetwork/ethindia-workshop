@@ -1,17 +1,48 @@
 {
-  "abi":  [
+  "abi": [
     {
-      "constant": false,
-      "inputs": [
+      "constant": true,
+      "inputs": [],
+      "name": "bookingId",
+      "outputs": [
         {
-          "name": "_propertyId",
+          "name": "",
           "type": "uint256"
         }
       ],
-      "name": "markPropertyAsInactive",
-      "outputs": [],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bookings",
+      "outputs": [
+        {
+          "name": "propertyId",
+          "type": "uint256"
+        },
+        {
+          "name": "checkInDate",
+          "type": "uint256"
+        },
+        {
+          "name": "checkoutDate",
+          "type": "uint256"
+        },
+        {
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -42,6 +73,20 @@
         {
           "name": "_propertyId",
           "type": "uint256"
+        }
+      ],
+      "name": "markPropertyAsInactive",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_propertyId",
+          "type": "uint256"
         },
         {
           "name": "checkInDate",
@@ -59,59 +104,13 @@
       "type": "function"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "propertyId",
-          "type": "uint256"
-        }
-      ],
-      "name": "NewProperty",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "propertyId",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "name": "bookingId",
-          "type": "uint256"
-        }
-      ],
-      "name": "NewBooking",
-      "type": "event"
-    },
-    {
       "constant": true,
-      "inputs": [
+      "inputs": [],
+      "name": "propertyId",
+      "outputs": [
         {
           "name": "",
           "type": "uint256"
-        }
-      ],
-      "name": "bookings",
-      "outputs": [
-        {
-          "name": "propertyId",
-          "type": "uint256"
-        },
-        {
-          "name": "checkInDate",
-          "type": "uint256"
-        },
-        {
-          "name": "checkoutDate",
-          "type": "uint256"
-        },
-        {
-          "name": "user",
-          "type": "address"
         }
       ],
       "payable": false,
@@ -152,6 +151,35 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "propertyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewProperty",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "propertyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "bookingId",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewBooking",
+      "type": "event"
     }
   ]
 }
