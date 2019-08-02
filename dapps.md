@@ -10,8 +10,9 @@
 
 -> insert inside `mounted()` method in `index.vue`
 
-```await setProvider()
-  this.posts = properties
+```
+await setProvider()
+this.posts = properties
 ```
 
 copy this to `setProvider` method in `metamask.js`
