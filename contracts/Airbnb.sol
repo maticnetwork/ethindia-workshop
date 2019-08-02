@@ -1,15 +1,32 @@
 pragma solidity ^0.5.7;
 
 contract Airbnb {
-  // INSERT struct Property
 
-  // Unique and sequential propertyId for every new property
+  // Property to be rented out on Airbnb
+  struct Property {
+    string name;
+    string description;
+    bool isActive; // is property active
+    uint256 price; // per day price in wei (1 ether = 10^18 wei)
+    address owner; // Owner of the property
+    // Is the property booked on a particular day,
+    // For the sake of simplicity, we assign 0 to Jan 1, 1 to Jan 2 and so on
+    // so isBooked[31] will denote whether the property is booked for Feb 1
+    bool[] isBooked;
+  }
+
   uint256 public propertyId;
 
   // mapping of propertyId to Property object
   mapping(uint256 => Property) public properties;
 
-  // INSERT struct Booking
+  // Details of a particular booking
+  struct Booking {
+    uint256 propertyId;
+    uint256 checkInDate;
+    uint256 checkoutDate;
+    address user;
+  }
 
   uint256 public bookingId;
 
@@ -28,17 +45,19 @@ contract Airbnb {
   );
 
   /**
-    * @dev Put up your funky space on the market
-    * @param name Name of the property
-    * @param description Short description of your property
-    * @param price Price per day in wei (1 ether = 10^18 wei)
-    */
+   * @dev Put up an Airbnb property in the market
+   * @param name Name of the property
+   * @param description Short description of your property
+   * @param price Price per day in wei (1 ether = 10^18 wei)
+   */
   function rentOutproperty(string memory name, string memory description, uint256 price) public {
-    // create a property object
+    Property memory property = Property(name, description, true /* isActive */, price, msg.sender /* owner */, new bool[](365));
 
     // Persist `property` object to the "permanent" storage
+    properties[propertyId] = property;
 
     // emit an event to notify the clients
+    emit NewProperty(propertyId++);
   }
 
   /**
@@ -49,12 +68,27 @@ contract Airbnb {
    */
   function rentProperty(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) public payable {
     // Retrieve `property` object from the storage
+    Property storage property = properties[_propertyId];
 
     // Assert that property is active
+    require(
+      property.isActive == true,
+      "property with this ID is not active"
+    );
 
     // Assert that property is available for the dates
+    for (uint256 i = checkInDate; i < checkoutDate; i++) {
+      if (property.isBooked[i] == true) {
+        // if property is booked on a day, revert the transaction
+        revert("property is not available for the selected dates");
+      }
+    }
 
     // Check the customer has sent an amount equal to (pricePerDay * numberOfDays)
+    require(
+      msg.value == property.price * (checkoutDate - checkInDate),
+      "Sent insufficient funds"
+    );
 
     // send funds to the owner of the property
     _sendFunds(property.owner, msg.value);
@@ -63,22 +97,26 @@ contract Airbnb {
     _createBooking(_propertyId, checkInDate, checkoutDate);
   }
 
+  function _createBooking(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) internal {
+    // Create a new booking object
+    bookings[bookingId] = Booking(_propertyId, checkInDate, checkoutDate, msg.sender);
+
+    // Retrieve `property` object from the storage
+    Property storage property = properties[_propertyId];
+
+    // Mark the property booked on the requested dates
+    for (uint256 i = checkInDate; i < checkoutDate; i++) {
+      property.isBooked[i] = true;
+    }
+
+    // Emit an event to notify clients
+    emit NewBooking(_propertyId, bookingId++);
+  }
+
   function _sendFunds (address beneficiary, uint256 value) internal {
     // address(uint160()) is a weird solidity quirk
     // Read more here: https://solidity.readthedocs.io/en/v0.5.10/050-breaking-changes.html?highlight=address%20payable#explicitness-requirements
     address(uint160(beneficiary)).transfer(value);
-  }
-
-  function _createBooking(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) internal {
-    // Create a new booking object
-
-    // persist to storage
-
-    // Retrieve `property` object from the storage
-
-    // Mark the property booked on the requested dates
-
-    // Emit an event to notify clients
   }
 
   /**
