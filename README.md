@@ -6,23 +6,19 @@ Setup
 npm install
 ```
 
-2. 
-  -> Follow [instructions](./Instructions.md) to complete the smart contract code.
-  
-  -> Follow [setup](./setup.md) to setup all requirements.
-  
-  -> Follow [dapps](./dapps.md) to complete the DApp code.
-
-3. Run ethereum blockchain locally
+2. Run ethereum blockchain locally
 ```
 npm run test:ethereum
 ```
 
-4. Run tests
-```
-npm test
-```
+3. Deploy and paste your contract address to variable `airbnbContractAddress` on line 7 in [utils.js](./dapp-ui/plugins/utils.js).
 
-### Full Solution
 
-[Complete Decentralized Airbnb](https://github.com/maticnetwork/ethindia-workshop/tree/complete-dapp) | or `git checkout complete-dapp`
+4. Run DApp UI
+```
+cd dapp-ui
+npm install
+npm run build
+npm run start
+```
+5. Navigate to http://localhost:3000/ to see the app running.
