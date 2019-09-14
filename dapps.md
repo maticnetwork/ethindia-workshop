@@ -2,11 +2,7 @@
 
 ### setting up DApp
 
-1. paste your contract address to `airbnbContractAddress`
-
-2. copy ABI
-
-3. Connect to MetaMask
+1. paste your contract address to variable `airbnbContractAddress` on line 7 in [utils.js](./dapp-ui/plugins/utils.js).
 
 -> insert this statements inside `mounted()` method in `index.vue`
 

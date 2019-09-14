@@ -2,7 +2,7 @@
 ### Intro
 In this workshop, we'll explore how to create decentralized Airbnb. We will use the pre-written Ethereum smart contract and deploy it locally on ganache using remix, we can deploy contract on any Testnet or Mainnet .
 
-This dApp uses [Nuxt](https://nuxtjs.org/), but is out of scope for this workshop, so don't worry, we will only be focusing on the pieces that helps us build. In reality, any JS framework can be used.
+This dApp uses [Nuxt](https://nuxtjs.org/), but is out of scope for this workshop, so don't worry, we will only be focusing on the pieces that helps us build. In practice, any JS framework can be used.
 
 
 # Installation
@@ -19,7 +19,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 nvm install --lts
 nvm use lts
 ```
-#### MetaMask 
+#### MetaMask
 
 [Download MetaMask chrome extension](https://metamask.io/)
 
@@ -30,7 +30,7 @@ npm install -g ganache-cli
 ```
 
 # Template clone and explore
-Now we have Setup installed properly, let’s grab the dApp template that we will use as the skeleton of our dApp. This template is a website built using Nuxt.js (don't worry if you don't know Nuxt.js, we are not focusing on this part). 
+Now we have Setup installed properly, let’s grab the dApp template that we will use as the skeleton of our dApp. This template is a website built using Nuxt.js (don't worry if you don't know Nuxt.js, we are not focusing on this part).
 
 ## We will...
 We will use existing solidity contracts developed in previous session, and then use these functions inside the website.
@@ -44,15 +44,13 @@ git clone https://github.com/maticnetwork/ethindia-workshop.git
 
 cd ethindia-workshop
 
-cd dapp-ui
-
 npm i
 ```
 
 ## Start TestRPC for developlemt using [ganache-cli](https://github.com/trufflesuite/ganache-cli)
 
 ```
-ganache-cli -p 8545
+npm run test:ethereum
 ```
 
 ## Deploy contract using Remix Etherium IDE
