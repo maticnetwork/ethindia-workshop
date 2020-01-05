@@ -1,7 +1,5 @@
 # dapp-ui
 
-> My wondrous Nuxt.js project
-
 ## Build Setup
 
 ``` bash
