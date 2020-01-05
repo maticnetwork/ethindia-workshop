@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     async sendTx() {
-      await sampleTx()
     }
   }
 };

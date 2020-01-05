@@ -11,9 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@openzeppelin/gsn-provider": "^0.1.9",
     "truffle": "^5.0.29"
   },
   "dependencies": {
-    "ganache-cli": "^6.5.1"
+    "@openzeppelin/contracts-ethereum-package": "^2.4.0",
+    "ganache-cli": "^6.5.1",
+    "openzeppelin-solidity": "^2.4.0",
+    "truffle-hdwallet-provider": "^1.0.17"
   }
 }

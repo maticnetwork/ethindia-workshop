@@ -1,8 +1,31 @@
 pragma solidity ^0.5.7;
 
-contract Airbnb {
+import "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNRecipient.sol";
 
-  // Property to be rented out on Airbnb
+contract Airbnb is GSNRecipient {
+
+  function acceptRelayedCall(
+    address relay,
+    address from,
+    bytes calldata encodedFunction,
+    uint256 transactionFee,
+    uint256 gasPrice,
+    uint256 gasLimit,
+    uint256 nonce,
+    bytes calldata approvalData,
+    uint256 maxPossibleCharge
+  ) external view returns (uint256, bytes memory) {
+
+		// approve ALL calls!
+    return _approveRelayedCall();
+
+  }
+
+  function _preRelayedCall(bytes memory context) internal returns (bytes32) {
+  }
+  function _postRelayedCall(bytes memory context, bool, uint256 actualCharge, bytes32) internal {
+  }
+
   struct Property {
     string name;
     string description;
@@ -51,7 +74,8 @@ contract Airbnb {
    * @param price Price per day in wei (1 ether = 10^18 wei)
    */
   function rentOutproperty(string memory name, string memory description, uint256 price) public {
-    Property memory property = Property(name, description, true /* isActive */, price, msg.sender /* owner */, new bool[](365));
+    address sender = _msgSender();
+    Property memory property = Property(name, description, true /* isActive */, price, sender /* owner */, new bool[](365));
 
     // Persist `property` object to the "permanent" storage
     properties[propertyId] = property;
@@ -99,7 +123,8 @@ contract Airbnb {
 
   function _createBooking(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) internal {
     // Create a new booking object
-    bookings[bookingId] = Booking(_propertyId, checkInDate, checkoutDate, msg.sender);
+    address sender = _msgSender();
+    bookings[bookingId] = Booking(_propertyId, checkInDate, checkoutDate, sender);
 
     // Retrieve `property` object from the storage
     Property storage property = properties[_propertyId];
@@ -124,8 +149,9 @@ contract Airbnb {
    * @param _propertyId Property ID
    */
   function markPropertyAsInactive(uint256 _propertyId) public {
+    address sender = _msgSender();
     require(
-      properties[_propertyId].owner == msg.sender,
+      properties[_propertyId].owner == sender,
       "THIS IS NOT YOUR PROPERTY"
     );
     properties[_propertyId].isActive = false;
