@@ -47,7 +47,7 @@ cd ethindia-workshop
 npm i
 ```
 
-## Start TestRPC for developlemt using [ganache-cli](https://github.com/trufflesuite/ganache-cli)
+## Start TestRPC for development using [ganache-cli](https://github.com/trufflesuite/ganache-cli)
 
 ```
 npm run test:ethereum
